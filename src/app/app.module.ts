@@ -18,6 +18,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {NoCommaPipe} from './project/NoCommaPipe';
 import { FormulaComponent } from './formula/formula.component';
 import { TemplateComponent } from './template/template.component';
+import { FieldFormComponent } from './field-form/field-form.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { TemplateComponent } from './template/template.component';
     NoCommaPipe,
     FormulaComponent,
     TemplateComponent,
+    FieldFormComponent,
   ],
   imports: [
     HttpClientModule,
