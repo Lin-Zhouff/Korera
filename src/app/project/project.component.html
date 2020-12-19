@@ -1,0 +1,115 @@
+
+<div class="content">
+  <div class="projectselecter col-3 float-right">
+    <mat-form-field appearance="fill">
+      <mat-label>Project</mat-label>
+      <mat-select [(ngModel)]="projectSelected" [placeholder]="projectSelected">
+        <mat-option *ngFor="let project of projects" [value]="project">
+          {{project}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="row tablerow">
+    <div class="ResourceTable col-6">
+      <div class="d-flex justify-content-between align-items-center topbar text-center">
+        <h1 class="m-2">Resources Catalog</h1>
+        <div class="button-group">
+          <button type="button" class="btn btn-warning btn-right" (click)="selected()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+          </svg></button>
+        </div>
+      </div>
+
+      <table mat-table [dataSource]="dataSource1">
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th class="py-0 select-h" mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle_1() : null"
+                          [checked]="selection1.hasValue() && isAllSelected_1()"
+                          [indeterminate]="selection1.hasValue() && !isAllSelected_1()"
+                          [aria-label]="checkboxLabel_1()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection1.toggle(row) : null"
+                          [checked]="selection1.isSelected(row)"
+                          [aria-label]="checkboxLabel_1(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="resourceName">
+          <th class="text-center text-uppercase font-weight-bold name-h" mat-header-cell *matHeaderCellDef> resource Name </th>
+          <td mat-cell *matCellDef="let element"> {{element['resourceName']}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="resourceCode">
+          <th class="text-center text-uppercase font-weight-bold name-h" mat-header-cell *matHeaderCellDef> resource Code </th>
+          <td mat-cell *matCellDef="let element"> {{element['resourceCode'] | number: '6.0' | noComma}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+
+      <mat-paginator #paginator1 [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+
+    </div>
+    <div class="ProjectTable col-6">
+      <div class="d-flex justify-content-between align-items-center topbar text-center">
+        <h1 class="m-2">Project Catalog</h1>
+          <button type="button" class="btn btn-warning btn-right" (click)="removeSelected()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+            </svg>
+          </button>
+      </div>
+
+      <table mat-table [dataSource]="dataSource2">
+        <ng-container matColumnDef="select">
+          <th class="py-0 select-h" mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle_2() : null"
+                          [checked]="selection2.hasValue() && isAllSelected_2()"
+                          [indeterminate]="selection2.hasValue() && !isAllSelected_2()"
+                          [aria-label]="checkboxLabel_2()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection2.toggle(row) : null"
+                          [checked]="selection2.isSelected(row)"
+                          [aria-label]="checkboxLabel_1(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="resourceName">
+          <th class="text-center text-uppercase font-weight-bold name-h" mat-header-cell *matHeaderCellDef> resource Name </th>
+          <td mat-cell *matCellDef="let element"> {{element['resourceName'] }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="resourceCode">
+          <th class="text-center text-uppercase font-weight-bold name-h" mat-header-cell *matHeaderCellDef> resource Code </th>
+          <td mat-cell *matCellDef="let element"> {{element['resourceCode'] | number: '6.0' | noComma}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator #paginator2 [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+
+    </div>
+  </div>
+
+  <div class="btns tablerow">
+    <button type="button" class="btn btn-link float-left" routerLink="/resources">Edit Resource</button>
+    <button type="button" class="btn btn-warning text-white float-right"
+            (click)="TranlateDatabase()">&#10004; Submit</button>
+  </div>
+</div>

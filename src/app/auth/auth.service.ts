@@ -37,33 +37,44 @@ export class AuthService {
   getAuthStatusListener(): Observable<boolean> {
     return this.authStatusListener.asObservable();
   }
-
+  // tslint:disable-next-line:typedef
+  createUser(userName: string, password: string) {
+    console.log(userName);
+    const authData: AuthData = { userName, password };
+    this.http.post(BACKEND_URL + '/register', authData).subscribe(
+      () => {
+        this.router.navigate(['/']);
+      },
+      error => {
+        this.authStatusListener.next(false);
+      }
+    );
+  }
   // tslint:disable-next-line:typedef
   login(userName: string, password: string) {
     const authData: AuthData = { userName, password };
-    console.log(authData.userName, authData.password);
     this.http
-      .post<{ token: string; expiresIn: number; userId: string }>(
+      .post<{ jwt: string; expiresIn: number; userId: string }>(
         BACKEND_URL + '/login',
         authData
       )
       .subscribe(
         response => {
-          const token = response.token;
+          const token = response.jwt;
           this.token = token;
           if (token) {
             const expiresInDuration = response.expiresIn;
-            this.setAuthTimer(expiresInDuration);
+            this.setAuthTimer(3600);
             this.isAuthenticated = true;
             this.userId = response.userId;
             this.authStatusListener.next(true);
             const now = new Date();
             const expirationDate = new Date(
-              now.getTime() + expiresInDuration * 1000
+              now.getTime() + 3600 * 1000
             );
             console.log(expirationDate);
             this.saveAuthData(token, expirationDate, this.userId);
-            this.router.navigate(['/']);
+            this.router.navigate(['/resources']);
           }
         },
         error => {
@@ -82,16 +93,17 @@ export class AuthService {
     this.clearAuthData();
     this.router.navigate(['/']);
   }
-  private setAuthTimer(duration: number):void {
+  private setAuthTimer(duration: number): void {
     console.log('Setting timer: ' + duration);
     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date, userId: string):void {
+  private saveAuthData(token: string, expirationDate: Date, userId: string): void {
+    console.log(token);
     localStorage.setItem('token', token);
-    localStorage.setItem('expiration', expirationDate.toISOString());
+    localStorage.setItem('expiration', expirationDate.toString());
     localStorage.setItem('userId', userId);
   }
 

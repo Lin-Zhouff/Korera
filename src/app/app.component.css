@@ -1,0 +1,22 @@
+html, body {
+  height: 100%;
+}
+main{
+  height: 100%;
+}
+
+
+.full-height {
+  height: 100%;
+}
+.navlist {
+  background: dimgray;
+}
+.navbtn {
+  border-bottom-right-radius:12px;
+  border-top-right-radius: 12px;
+  display: inline-block;
+  text-align: center;
+  padding: 10px 20px;
+  color: white;
+}

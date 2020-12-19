@@ -1,0 +1,29 @@
+table {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #bbb;
+}
+
+table th {
+  background-color: #c9c9c9;
+  font-size: larger;
+  border: 1px solid #bbb;
+  flex: 50%;
+}
+.ProjectTable{
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.topbar {
+  background-color: #858585;
+  height: 55px;
+  vertical-align: middle;
+  width: 100%;
+}
+.tablerow{
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}

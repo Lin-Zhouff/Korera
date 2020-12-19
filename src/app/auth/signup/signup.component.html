@@ -1,1 +1,38 @@
-<p>signup works!</p>
+<div class="col-md-2 mx-auto form p-4">
+  <h1 class="py-3 text-truncate text-center title">Sign up</h1>
+  <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading" class="justify-content-center" novalidate>
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col">
+          <label class="UserName font-weight-bolder" for='userName'>Username</label>
+          <input class="form-control" id="userName" name="userName" ngModel type="text" placeholder="Username" required>
+          <div *ngIf="!signupForm.controls.userName?.valid &&(signupForm.controls.userName?.dirty || signupForm.controls.userName?.touched)" class="alert alert-danger">
+            <div>Please enter valid Username</div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="form-row">
+        <div class="col">
+          <label class="password font-weight-bolder" for='password'>Password</label>
+          <input class="form-control" id="password" name="password" ngModel type="password" placeholder="Password" required>
+          <div *ngIf="!signupForm.controls.password?.valid &&(signupForm.controls.password?.dirty || signupForm.controls.password?.touched)" class="alert alert-danger">
+            <div>Please enter valid password</div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="form-row">
+        <div class="col">
+          <label class="passwordConfirm font-weight-bolder" for='passwordConfirm'>Confirm Password</label>
+          <input class="form-control" id="passwordConfirm" name="passwordConfirm" ngModel type="password" placeholder="Confirm your password" required>
+          <div *ngIf="!signupForm.controls.passwordConfirm?.valid &&(signupForm.controls.passwordConfirm?.dirty || signupForm.controls.passwordConfirm?.touched)" class="alert alert-danger">
+            <div>Please enter same password</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-lg btn-block" type="submit" *ngIf="!isLoading">Sign up</button>
+  </form>
+</div>

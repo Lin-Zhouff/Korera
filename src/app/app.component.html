@@ -1,4 +1,30 @@
 <app-header></app-header>
-<main>
-  <router-outlet></router-outlet>
+<main >
+  <mat-sidenav-container class="mat-slide-toggle-content full-height">
+    <mat-sidenav class="navlist" #sidenav mode="side"(opened)="events= false" (closed)="events = true">
+      <div class="navbar-nav" style="width: 260px">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a routerLink="/resources">Resources</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/project">Project</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/formula">Formula</a>
+          </li>
+        </ul>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <span class="navlist navbtn" (click)="sidenav.toggle()" *ngIf="events">
+        &#10095;
+      </span>
+      <span class="navlist navbtn" (click)="sidenav.toggle()" *ngIf="!events">
+        &#10094;
+      </span>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </main>

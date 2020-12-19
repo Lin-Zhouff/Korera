@@ -1,0 +1,38 @@
+
+table {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #bbb;
+}
+
+table th {
+  background-color: #c9c9c9;
+  font-size: larger;
+  border: 1px solid #bbb;
+  width: 50%;
+}
+
+.ResourceTable{
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.topbar {
+  background-color: #858585;
+  height: 55px;
+  vertical-align: middle;
+}
+
+.topbar .btn-right {
+  height: 38px;
+  width: 38px;
+  margin-right: 8px;
+}
+
+.topbar input {
+  height: 38px;
+  width: 15em;
+  margin-left: 8px;
+}

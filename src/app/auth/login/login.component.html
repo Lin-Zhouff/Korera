@@ -1,16 +1,29 @@
 <div class="col-md-2 mx-auto form p-4">
-  <h1 class="display-4 py-2 text-truncate text-center">Login</h1>
-  <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading" class="justify-content-center">
+  <h1 class="py-3 text-truncate text-center title">Login</h1>
+  <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading" class="justify-content-center" novalidate>
     <div class="form-group">
-      <label class="UserName" for='userName'>username</label>
-      <input class="form-control" id="userName" name="userName" ngModel type="userName" placeholder="username"
-             #emailInput="ngModel" required>
-
-      <label class="password" for='password'>password</label>
-      <input class="form-control" id="password" name="password" ngModel type="password" placeholder="Password"
-             #passwordInput="ngModel" required>
+      <div class="form-row">
+        <div class="col">
+          <label class="UserName font-weight-bolder" for='userName'>Username</label>
+          <input class="form-control" id="userName" name="userName" ngModel type="text" placeholder="Username" required>
+          <div *ngIf="!loginForm.controls.userName?.valid &&(loginForm.controls.userName?.dirty || loginForm.controls.userName?.touched)" class="alert alert-danger">
+            <div>Please enter valid Username</div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="form-row">
+        <div class="col">
+          <label class="password font-weight-bolder" for='password'>Password</label>
+          <input class="form-control" id="password" name="password" ngModel type="password" placeholder="Password" required>
+          <div *ngIf="!loginForm.controls.password?.valid &&(loginForm.controls.password?.dirty || loginForm.controls.password?.touched)" class="alert alert-danger">
+            <div>Please enter valid password</div>
+          </div>
+        </div>
+      </div>
     </div>
+    <button class="btn btn-primary btn-lg btn-block" type="submit" *ngIf="!isLoading">Login</button>
     <br>
-    <button class="btn btn-primary btn-md" type="submit" *ngIf="!isLoading">Login</button>
+    <button class="btn signup" routerLink="/signup">sign up</button>
   </form>
 </div>

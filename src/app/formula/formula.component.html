@@ -1,0 +1,34 @@
+<div class="content">
+  <div class="projectselecter col-3 float-right">
+    <mat-form-field appearance="fill">
+      <mat-label>Project</mat-label>
+      <mat-select [(ngModel)]="projectSelected" [placeholder]="projectSelected">
+        <mat-option *ngFor="let project of projects" [value]="project">
+          {{project}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="ProjectTable row">
+    <div class="text-center topbar">
+        <h1 class="m-2">Resources Catalog</h1>
+      </div>
+
+    <table id="table" class="table-editable">
+        <tr>
+          <th class="text-center text-uppercase font-weight-bold" *ngFor="let data of displayedColumns">{{data}}</th>
+        </tr>
+        <tr *ngFor="let person of Datasorce; let id = index">
+          <td *ngFor="let data of displayedColumns">
+            <input (keyup)="changeValue(id, data, $event)" (blur)="updateList(id, data, $event)"
+                   contenteditable="true" [value]="person[data]">
+          </td>
+
+        </tr>
+      </table>
+  </div>
+  <div class="btns tablerow">
+    <button type="button" class="btn btn-link float-left" routerLink="/template">Edit Quantity Survey Template</button>
+    <button type="button" class="btn btn-warning text-white float-right">&#10004; Submit</button>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+.btn-primary {
+  background: #ff5301;
+  color: #ffffff;
+  border: 0 none;
+}
+.title {
+  font-size:55px;
+  color: #ff5301;
+  font-family: arial, serif;
+  font-style: italic;
+  text-shadow: 1px 1px #000000;
+}
+
+.signup {
+  color: white;
+  background-color: crimson;
+  font-size :12px;
+  width: 6em;
+  height: 3em;
+}
