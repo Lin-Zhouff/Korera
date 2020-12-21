@@ -16,3 +16,8 @@ ul {
 .spacer {
   flex: 1 1 auto;
 }
+.newpopover {
+  left: -90px;
+  width: 300px;
+  background-color: #858585;
+}

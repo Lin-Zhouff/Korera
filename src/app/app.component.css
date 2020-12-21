@@ -5,7 +5,6 @@ main{
   height: 100%;
 }
 
-
 .full-height {
   height: 100%;
 }
@@ -19,4 +18,24 @@ main{
   text-align: center;
   padding: 10px 20px;
   color: white;
+}
+
+ul.navbar-nav li a{
+  color: white !important;
+  text-decoration: none !important;
+}
+
+ul.navbar-nav li a:hover{
+  color: #e8a228 !important;
+  text-decoration: none !important;
+}
+
+ul.navbar-nav{
+  padding-left: 35px;
+  padding-top: 20px;
+}
+
+li {
+  font-size: 20px;
+  margin-bottom: 5px;
 }

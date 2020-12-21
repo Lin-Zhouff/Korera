@@ -18,6 +18,10 @@ export class AuthService {
   private tokenTimer: any;
   // @ts-ignore
   private userId: string;
+  // @ts-ignore
+  private userName: string;
+  // @ts-ignore
+  private CreateTime : string;
   private authStatusListener = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -54,7 +58,7 @@ export class AuthService {
   login(userName: string, password: string) {
     const authData: AuthData = { userName, password };
     this.http
-      .post<{ jwt: string; expiresIn: number; userId: string }>(
+      .post<{ jwt: string; userId: string ;Name: string; time: string}>(
         BACKEND_URL + '/login',
         authData
       )
@@ -63,17 +67,17 @@ export class AuthService {
           const token = response.jwt;
           this.token = token;
           if (token) {
-            const expiresInDuration = response.expiresIn;
             this.setAuthTimer(3600);
             this.isAuthenticated = true;
             this.userId = response.userId;
+            this.CreateTime = response.time;
+            this.userName = response.Name;
             this.authStatusListener.next(true);
             const now = new Date();
             const expirationDate = new Date(
               now.getTime() + 3600 * 1000
             );
-            console.log(expirationDate);
-            this.saveAuthData(token, expirationDate, this.userId);
+            this.saveAuthData(token, expirationDate, this.userId, this.userName, this.CreateTime);
             this.router.navigate(['/resources']);
           }
         },
@@ -100,17 +104,22 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date, userId: string): void {
+  private saveAuthData(token: string, expirationDate: Date, userId: string,
+                       userName: string, CreateTime: string): void {
     console.log(token);
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toString());
     localStorage.setItem('userId', userId);
+    localStorage.setItem('userName', userName);
+    localStorage.setItem('CreateTime', CreateTime);
   }
 
   private clearAuthData(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('expiration');
     localStorage.removeItem('userId');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('CreateTime');
   }
 
   // tslint:disable-next-line:typedef

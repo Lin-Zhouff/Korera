@@ -10,34 +10,41 @@
     </mat-form-field>
   </div>
   <div class="fieldsTable row row-cols-2" style="height: 60%">
+    <div class="col-12 row">
       <div class="col-5" style="border:1px solid black;" >
-        <table class="table table-striped table-bordered">
-          <tbody>
-          <tr>
-            <td class="text-capitalize font-weight-bold h4" colspan="2">project scope fields</td>
-          </tr>
-          <tr>
-            <td>Name</td>
-            <td><input class="custom-checkbox" type="checkbox" id="name" checked disabled></td>
-          </tr>
-          <tr>
-            <td>cost_code</td>
-            <td><input class="custom-checkbox" type="checkbox" id="code"></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+      <table class="table table-striped table-bordered">
+        <tbody>
+        <tr>
+          <td class="text-capitalize font-weight-bold h4" colspan="2">project scope fields</td>
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td><input class="custom-checkbox" type="checkbox" id="name" checked disabled></td>
+        </tr>
+        <tr>
+          <td>cost_code</td>
+          <td><input class="custom-checkbox" type="checkbox" id="code" [(ngModel)]="code"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
       <div class="col-7" style="border:1px solid black;" >
         <div class="contant" #fieldsHeader>
           <div class="row Survey-fields-header text-capitalize font-weight-bold h4" >quantity survey fields</div>
-
         </div>
         <div class="contant">
-          <div class="row">
-            <button class="btn btn-warning float-right" (click)="addField()">here</button>
+          <div class="row float-right ">
+            <div class=" mb-3 mr-3 align-self-end">
+              Add Field <button class="btn btn-warning text-white" (click)="addField()">+</button>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="col-3 save-row row float-right">
+      <button class="w-50 btn btn-warning btn-lg" (click)="save()" [disabled]="saveVaild">Save</button>
+    </div>
   </div>
-  <div class="fieldsTable row" style="border:1px solid black;"></div>
+
+
 </div>

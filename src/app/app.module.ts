@@ -4,21 +4,19 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { ResourcesComponent } from './resources/resources.component';
-import {MatTableModule} from '@angular/material/table';
+import {EditColumnPopupComponent, NewColumnPopupComponent, ResourcesComponent} from './resources/resources.component';
 import {AuthInterceptor} from './auth/auth-interceptor';
 import { ProjectComponent } from './project/project.component';
-import {MatSelectModule} from '@angular/material/select';
-import {MatCheckboxModule} from '@angular/material/checkbox';
 import {NoCommaPipe} from './project/NoCommaPipe';
 import { FormulaComponent } from './formula/formula.component';
 import { TemplateComponent } from './template/template.component';
 import { FieldFormComponent } from './field-form/field-form.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -30,6 +28,8 @@ import { FieldFormComponent } from './field-form/field-form.component';
     FormulaComponent,
     TemplateComponent,
     FieldFormComponent,
+    NewColumnPopupComponent,
+    EditColumnPopupComponent,
   ],
   imports: [
     HttpClientModule,
@@ -38,10 +38,9 @@ import { FieldFormComponent } from './field-form/field-form.component';
     FormsModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    MatSidenavModule,
-    MatTableModule,
-    MatSelectModule,
-    MatCheckboxModule,
+    NgbModule,
+    ReactiveFormsModule,
+    MatSortModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

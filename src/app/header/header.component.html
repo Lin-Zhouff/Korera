@@ -2,5 +2,26 @@
   <a class="navbar-brand bg-primary" href="#">
     ResourcesModel Management
   </a>
+  <div class="row">
+    <div class="col">
+      <ng-template #popContent><button (click)="onLogout()" routerLink="/login">Logout</button></ng-template>
+      <ng-template #popTitle>
+        <div>
+          Hello {{Name}}
+        </div>
+        <div>memeber since {{Time}}</div>
+      </ng-template>
+      <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContent"
+              [popoverTitle]="popTitle" [disabled]="!userIsAuthenticated" popoverClass="newpopover">
+        <mat-icon>account_circle</mat-icon>
+      </button>
 
+    </div>
+    <div class="col" style="width: 100px">
+      <div class="mt-2 h5" *ngIf="userIsAuthenticated">{{Name}}</div>
+    </div>
+    <div class="col">
+      <button class="btn">Question</button>
+    </div>
+  </div>
 </nav>

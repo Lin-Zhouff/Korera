@@ -14,21 +14,37 @@
         <h1 class="m-2">Resources Catalog</h1>
       </div>
 
-    <table id="table" class="table-editable">
-        <tr>
-          <th class="text-center text-uppercase font-weight-bold" *ngFor="let data of displayedColumns">{{data}}</th>
-        </tr>
-        <tr *ngFor="let person of Datasorce; let id = index">
-          <td *ngFor="let data of displayedColumns">
-            <input (keyup)="changeValue(id, data, $event)" (blur)="updateList(id, data, $event)"
-                   contenteditable="true" [value]="person[data]">
-          </td>
+<!--    <table id="table" class="table-editable">-->
+<!--        <tr style="height: 56px">-->
+<!--          <th class="text-center text-uppercase font-weight-bold" *ngFor="let data of displayedColumns">{{data}}</th>-->
+<!--        </tr>-->
+<!--        <tr *ngFor="let person of Datasorce; let id = index">-->
+<!--          <td *ngFor="let data of displayedColumns">-->
+<!--            <input style="border-color: transparent !important; width: 100%" (keyup)="changeValue(id, data, $event)" (blur)="updateList(id, data, $event)"-->
+<!--                   contenteditable="true" [value]="person[data]">-->
+<!--          </td>-->
 
-        </tr>
-      </table>
+<!--        </tr>-->
+<!--      </table>-->
+
+    <table mat-table [dataSource]="Datasorce">
+      <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+        <th class="text-center text-uppercase font-weight-bold" mat-header-cell *matHeaderCellDef>{{column}}</th>
+        <td mat-cell *matCellDef="let element; let id = index">
+            <input style="border-color: transparent !important; width: 100%"
+                   (keyup)="changeValue(id, column, $event)"
+                   (blur)="updateList(id, column, $event)"
+                   contenteditable="true" [value]="element[column]">
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
   </div>
   <div class="btns tablerow">
     <button type="button" class="btn btn-link float-left" routerLink="/template">Edit Quantity Survey Template</button>
-    <button type="button" class="btn btn-warning text-white float-right">&#10004; Submit</button>
+    <button type="button" class="btn btn-warning text-white float-right" (click)="SaveDataBase()">&#10004; Submit</button>
   </div>
 </div>

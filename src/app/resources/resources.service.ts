@@ -11,7 +11,7 @@ const BACKEND_URL = environment.apiUrl + '/resources';
 @Injectable({ providedIn: 'root' })
 export class ResourcesService{
 
-  private ResourcesList: any;
+  private ResourcesList: ResourcesModel[] = [];
 
   private ResourcesUpdated = new Subject<{ resource: ResourcesModel[] }>();
 
@@ -21,20 +21,20 @@ export class ResourcesService{
   getResources(): void{
     this.http.get<{Resources: any}>
     (BACKEND_URL + '/all')
-      //.pipe(
-      //  map(ResourceData => {
-      //    return { ResourcesList: Object.values(ResourceData).map(
-      //      resource => {
-      //        return {
-      //          'resource name': resource.resourceName,
-      //          'resource code': resource.resourceCode
-      //        }
-      //      }
-      //    )}
-      //  })
-      //)
+      .pipe(
+        map(ResourceData => {
+          return { ResourcesList: Object.values(ResourceData).map(
+            resource => {
+              return {
+                'resource name': resource.resourceName,
+                'resource code': resource.resourceCode
+              }
+            }
+          )}
+        })
+      )
       .subscribe(transformedPostData => {
-        this.ResourcesList = transformedPostData;
+        this.ResourcesList = transformedPostData.ResourcesList;
         this.ResourcesUpdated.next({
           resource: [...this.ResourcesList]
         });

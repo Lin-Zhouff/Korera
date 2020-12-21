@@ -10,7 +10,7 @@ table th {
   background-color: #c9c9c9;
   font-size: larger;
   border: 1px solid #bbb;
-  width: 50%;
+  min-width: 33%;
 }
 
 .ResourceTable{

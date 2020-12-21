@@ -1,0 +1,29 @@
+.field {
+  width: 30%;
+  border-right:1px solid #dee2e6;
+}
+.delete-field {
+  width: 10%;
+}
+input, label {
+  display:block;
+}
+select {
+  width: 80%;
+  height: 27px;
+}
+.Survey-fields {
+  border: 1px solid #dee2e6;
+  width: 85%;
+  padding: 0.75rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 8px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.alert {
+  color: darkred;
+  font-size: small;
+  height: 1px;
+  padding: 0;
+}
